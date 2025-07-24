@@ -70,7 +70,7 @@ export default function BlogCategoryLayout({
             <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-2 max-w-7xl">
               {posts.map(post => (
                 <Link key={post.id} href={post.url} className="block bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden w-full max-w-2xl h-full flex flex-col">
-                  <Image src={post.image} alt={post.title} width={400} height={200} className="w-full h-48 object-cover" />
+                  <Image src={typeof post.image === 'string' && post.image ? post.image : '/images/blog-placeholder.webp'} alt={post.title} width={400} height={200} className="w-full h-48 object-cover" />
                   <div className="p-4 flex flex-col flex-1">
                     <h3 className="text-lg font-semibold mb-2">{post.title}</h3>
                     <p className="text-sm text-muted mb-2 flex-1">{post.excerpt}</p>

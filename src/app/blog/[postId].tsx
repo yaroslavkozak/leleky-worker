@@ -26,7 +26,7 @@ export default function BlogPostPage() {
       title={post ? post.title : 'Блог пост'}
       content={post ? (
         <>
-          <Image src={post.image} alt={post.title} width={600} height={300} className="rounded-xl mb-6 object-cover" />
+          <Image src={typeof post.image === 'string' && post.image ? post.image : '/images/blog-placeholder.webp'} alt={post.title} width={600} height={300} className="rounded-xl mb-6 object-cover" />
           <p>{post.excerpt}</p>
           <div className="mt-6 text-xs text-gray-400">{post.date}</div>
         </>
@@ -35,7 +35,7 @@ export default function BlogPostPage() {
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
           {similar.map(sim => (
             <Link key={sim.id} href={sim.url} className="block bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
-              <Image src={sim.image} alt={sim.title} width={400} height={200} className="w-full h-40 object-cover" />
+              <Image src={typeof sim.image === 'string' && sim.image ? sim.image : '/images/blog-placeholder.webp'} alt={sim.title} width={400} height={200} className="w-full h-40 object-cover" />
               <div className="p-4">
                 <h3 className="text-lg font-semibold mb-2">{sim.title}</h3>
                 <span className="text-xs text-gray-400">{sim.date}</span>

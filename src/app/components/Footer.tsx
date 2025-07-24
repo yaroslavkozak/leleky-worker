@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { advancedParentingStages } from './Header';
+import { advancedParentingStages } from '../content/advancedParentingStages';
 import { tools } from '../content/tools';
 import { blogCategories } from '../content/blogCategories';
 

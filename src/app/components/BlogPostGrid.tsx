@@ -25,7 +25,7 @@ export default function BlogPostGrid({ posts, heading, className = '', topicName
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center">
         {posts.map(post => (
           <Link key={post.id} href={post.url} className="block bg-white rounded-xl shadow-lg hover:shadow-xl transition overflow-hidden w-full max-w-xs">
-            <Image src={post.image} alt={post.title} width={400} height={200} className="w-full h-32 object-cover" />
+            <Image src={typeof post.image === 'string' && post.image ? post.image : '/images/blog-placeholder.webp'} alt={post.title} width={400} height={200} className="w-full h-32 object-cover" />
             <div className="p-4">
               <h3 className="text-lg font-semibold mb-2">{post.title}</h3>
               {(post.relatedTopics && post.category) && (

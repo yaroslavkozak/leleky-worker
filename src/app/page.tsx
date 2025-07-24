@@ -7,8 +7,7 @@ import { blogPosts } from './content/blogPosts';
 import { blogCategories } from './content/blogCategories';
 import { topics } from './content/topics';
 import Link from 'next/link';
-import { advancedParentingStages } from './components/Header';
-import type { AdvancedStage } from './components/Header';
+import { advancedParentingStages, AdvancedStage } from './content/advancedParentingStages';
 import ToolGrid from './components/ToolGrid';
 import BlogPostGrid from './components/BlogPostGrid';
 // import Head from 'next/head'; // In the app directory, use the Metadata API instead of next/head
