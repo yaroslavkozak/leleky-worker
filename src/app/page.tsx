@@ -1,88 +1,100 @@
-import Image from "next/image";
+import LandingLayout from './components/LandingLayout';
+import TrimesterSelectionBlock from './components/TrimesterSelectionBlock';
+import WeekSelectionBlock from './components/WeekSelectionBlock';
+import Section from './components/Section';
+import { tools } from './content/tools';
+import { blogPosts } from './content/blogPosts';
+import { blogCategories } from './content/blogCategories';
+import { topics } from './content/topics';
+import Link from 'next/link';
+import { advancedParentingStages } from './components/Header';
+import type { AdvancedStage } from './components/Header';
+import ToolGrid from './components/ToolGrid';
+import BlogPostGrid from './components/BlogPostGrid';
+// import Head from 'next/head'; // In the app directory, use the Metadata API instead of next/head
+
+const hero = (
+  <section
+    className="relative flex items-center justify-center min-h-[60vh] md:min-h-[70vh] w-full bg-cover bg-center"
+    style={{ backgroundImage: "url('/images/homepage-slider/hero.webp')" }}
+  >
+    <div className="absolute inset-0 bg-black/40" />
+    <div className="relative z-10 w-full text-center flex flex-col items-center justify-center">
+      <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+        Ласкаво просимо до <span className="text-primary">Лелеки</span>
+      </h1>
+      <p className="text-lg text-white max-w-2xl mx-auto mb-8 drop-shadow">
+        Ваш надійний порадник на кожному етапі батьківства — від планування до підліткового віку.
+      </p>
+      <button className="bg-primary text-white font-bold py-3 px-8 rounded-lg hover:bg-opacity-90 transition-colors shadow-lg">
+        Почати тут
+      </button>
+    </div>
+  </section>
+);
+
+const topicNameMap = Object.fromEntries(topics.map(t => [t.id, t.name]));
+const blogCategoryMap = Object.fromEntries(blogCategories.map(c => [c.id, c.name]));
+
+// Custom titles for stages in the homepage section
+const customStageTitles = [
+  'Ми плануємо дитину',
+  'Я вагітна!',
+  'Ми стали батьками',
+  'Дитині вже рочок',
+];
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
+      {/* <Head>
+        <title>Лелеки — Платформа для батьків: від планування до підлітків</title>
+        <meta name="description" content="Ваш надійний порадник на кожному етапі батьківства — від планування до підліткового віку. Корисні статті, інструменти, блог та база знань для українських батьків." />
+      </Head> */}
+      <LandingLayout hero={hero}>
+        <div className="overflow-x-hidden">
+      <Section>
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-text">Оберіть етап розвитку вашої дитини</h2>
+            <p className="text-center text-muted max-w-2xl mx-auto mb-10">
+              Виберіть етап, щоб отримати корисну інформацію, поради та інструменти для вашої ситуації.
+            </p>
+            <div className="flex flex-wrap justify-center gap-8">
+              {advancedParentingStages.map((stage: AdvancedStage, idx: number) => (
+                <Link key={stage.id} href={stage.href || `/stages/${stage.id}`} className="bg-white rounded-xl shadow-lg flex flex-col items-center min-w-[220px] max-w-xs w-full hover:shadow-xl transition group mx-1 p-6">
+                  {stage.icon && <stage.icon className="w-10 h-10 text-primary mb-4" />}
+                  <h3 className="text-lg font-semibold text-text mb-1 text-center">{customStageTitles[idx] || stage.name}</h3>
+                  <span className="mt-auto text-primary font-semibold">Перейти до етапу</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </Section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        <Section>
+          <TrimesterSelectionBlock />
+        </Section>
+        <Section>
+          <WeekSelectionBlock />
+        </Section>
+        <Section className="bg-neutral">
+          <div className="container mx-auto px-4">
+            <ToolGrid tools={tools} />
+          </div>
+        </Section>
+        <Section>
+          <div className="container mx-auto px-4">
+            <BlogPostGrid
+              posts={blogPosts.slice(0, 12)}
+              heading="Блог"
+              topicNameMap={topicNameMap}
+              blogCategoryMap={blogCategoryMap}
+            />
+          </div>
+        </Section>
+      </div>
+    </LandingLayout>
+    </>
   );
 }
